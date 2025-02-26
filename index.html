@@ -272,7 +272,31 @@
 				window.location.href = 'https://www.youtube.com/user/levraiyanou';
 			}
 		}
+// Initialize the clock
+const clock = new THREE.Clock()
+let lastElapsedTime = 0 // create a global variable to store the elapsed time
 
+// Animate Loop
+function animate() {
+  // Render the Scene
+  renderer.render(scene, camera)
+
+  // Update the controls
+  controls.update()
+
+  // get the elapsed time and calculate the delta
+  const elapsedTime = clock.getElapsedTime()
+  const deltaTime = elapsedTime - lastElapsedTime
+  lastElapsedTime = elapsedTime
+
+  // Mixer update
+  if (mixer != undefined) {
+    mixer.update(deltaTime) // update the mixer
+  }
+
+  requestAnimationFrame(animate)
+}
+animate()
 		</script>
 	</body>
 </html>
